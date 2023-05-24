@@ -22,9 +22,8 @@ public class BasicOrderList implements OrderList {
 	}
 
 	@Override
-	public HashMap<Long, BasicOrder> getAllOrders() {
-		// TODO Auto-generated method stub
-		return null;
+	public BasicOrder[] getAllOrders() {
+		return orders.values().toArray(new BasicOrder[0]);
 	}
 
 }

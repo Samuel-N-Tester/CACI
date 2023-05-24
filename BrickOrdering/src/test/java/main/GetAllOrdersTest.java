@@ -33,23 +33,26 @@ class GetAllOrdersTest {
         webTestClient.post()
     	.uri("/createOrder")
     	.contentType(MediaType.APPLICATION_JSON)
-    	.body(BodyInserters.fromValue(request1));
+    	.body(BodyInserters.fromValue(request1))
+    	.exchange();
         
         // this would be order reference 2
         webTestClient.post()
     	.uri("/createOrder")
     	.contentType(MediaType.APPLICATION_JSON)
-    	.body(BodyInserters.fromValue(request2));
+    	.body(BodyInserters.fromValue(request2))
+    	.exchange();
         
         // this would be order reference 3
         webTestClient.post()
     	.uri("/createOrder")
     	.contentType(MediaType.APPLICATION_JSON)
-    	.body(BodyInserters.fromValue(request3));
+    	.body(BodyInserters.fromValue(request3))
+    	.exchange();
         
         // retrieve order reference 2
         webTestClient.get()
-	    	.uri("/createOrder?order=2")
+	    	.uri("/getAllOrders?order=2")
 	    	.exchange()
 	        .expectStatus().isOk()
 	        .expectBody().json(expectedReply);

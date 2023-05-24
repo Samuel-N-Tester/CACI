@@ -33,5 +33,11 @@ public class BrickController {
 	public BasicOrder getOrder(@RequestParam(value="order", required=false, defaultValue="0")Long orderReference) {
 		return basicOrderList.getOrder(orderReference);
 	}
+	
+	@RequestMapping(value = "/getAllOrders", method = RequestMethod.GET)
+	@ResponseBody
+	public BasicOrder[] getAllOrders() {
+		return basicOrderList.getAllOrders();
+	}
 
 }
