@@ -17,13 +17,12 @@ public class BasicOrderList implements OrderList {
 	}
 
 	@Override
-	public int getOrder(Long orderReference) {
-		// TODO Auto-generated method stub
-		return 0;
+	public BasicOrder getOrder(Long orderReference) {
+		return orders.get(orderReference);
 	}
 
 	@Override
-	public BasicOrder getAllOrders() {
+	public HashMap<Long, BasicOrder> getAllOrders() {
 		// TODO Auto-generated method stub
 		return null;
 	}

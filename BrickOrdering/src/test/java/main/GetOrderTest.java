@@ -24,30 +24,35 @@ class GetOrderTest {
 	 */
     @Test
     public void testWithRequest1() {
-        String request = testFileReader.testDataFileAsString("request1.json");
+        String request1 = testFileReader.testDataFileAsString("request1.json");
+        String request2 = testFileReader.testDataFileAsString("request2.json");
+        String request3 = testFileReader.testDataFileAsString("request3.json");
         String expectedReply = testFileReader.testDataFileAsString("reply2.json");
         
         // this would be order reference 1
         webTestClient.post()
     	.uri("/createOrder")
     	.contentType(MediaType.APPLICATION_JSON)
-    	.body(BodyInserters.fromValue(request));
+    	.body(BodyInserters.fromValue(request1))
+    	.exchange();
         
         // this would be order reference 2
         webTestClient.post()
     	.uri("/createOrder")
     	.contentType(MediaType.APPLICATION_JSON)
-    	.body(BodyInserters.fromValue(request));
+    	.body(BodyInserters.fromValue(request2))
+    	.exchange();
         
         // this would be order reference 3
         webTestClient.post()
     	.uri("/createOrder")
     	.contentType(MediaType.APPLICATION_JSON)
-    	.body(BodyInserters.fromValue(request));
+    	.body(BodyInserters.fromValue(request3))
+    	.exchange();
         
         // retrieve order reference 2
         webTestClient.get()
-	    	.uri("/createOrder?order=2")
+	    	.uri("/getOrder?order=2")
 	    	.exchange()
 	        .expectStatus().isOk()
 	        .expectBody().json(expectedReply);

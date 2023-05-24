@@ -1,9 +1,11 @@
 package orders;
 
+import java.util.HashMap;
+
 public interface OrderList {
 	
 	Long createOrder(int numberOfBricks);
-	int getOrder(Long orderReference);
-	BasicOrder getAllOrders();
+	BasicOrder getOrder(Long orderReference);
+	HashMap<Long, BasicOrder> getAllOrders();
 
 }

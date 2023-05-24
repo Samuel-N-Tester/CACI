@@ -5,10 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import orders.BasicOrderList;
+import orders.BasicOrder;
 
 @SpringBootApplication
 @RestController
@@ -23,8 +25,13 @@ public class BrickController {
 	@RequestMapping(value = "/createOrder", method = RequestMethod.POST)
 	@ResponseBody
 	public Long createOrder(@RequestBody int numberOfBricks) {
-		Long orderReference = basicOrderList.createOrder(numberOfBricks);
-		return orderReference;
+		return basicOrderList.createOrder(numberOfBricks);
+	}
+	
+	@RequestMapping(value = "/getOrder", method = RequestMethod.GET)
+	@ResponseBody
+	public BasicOrder getOrder(@RequestParam(value="order", required=false, defaultValue="0")Long orderReference) {
+		return basicOrderList.getOrder(orderReference);
 	}
 
 }
