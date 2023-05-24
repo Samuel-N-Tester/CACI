@@ -34,13 +34,15 @@ class CreateOrderTest {
         webTestClient.post()
     	.uri("/createOrder")
     	.contentType(MediaType.APPLICATION_JSON)
-    	.body(BodyInserters.fromValue(request1));
+    	.body(BodyInserters.fromValue(request1))
+    	.exchange();
         
         // this would be order reference 2
         webTestClient.post()
     	.uri("/createOrder")
     	.contentType(MediaType.APPLICATION_JSON)
-    	.body(BodyInserters.fromValue(request2));
+    	.body(BodyInserters.fromValue(request2))
+    	.exchange();
         
         // this would be order reference 3
         ((RequestBodySpec) webTestClient.post()
