@@ -1,0 +1,14 @@
+[
+    {
+        "orderReference": 1,
+        "numberOfBricks": 50
+    },
+    {
+        "orderReference": 2,
+        "numberOfBricks": 26
+    },
+    {
+        "orderReference": 3,
+        "numberOfBricks": 33
+    }
+]
