@@ -159,5 +159,34 @@ class BrickControllerTest {
 	        .expectStatus().isOk()
 	        .expectBody().json(expectedReply);
     }
+    
+	/**
+	 * Test to see if the order reference is returned correctly when an order is updated
+	 */
+    @Test
+	@Order(7)
+    public void testFulfuilOrder() {
+
+        String expectedReply = testFileReader.testDataFileAsString("reply5.json");
+
+        webTestClient.put()
+	    	.uri("/fufilOrder/3")
+	    	.exchange()
+	        .expectStatus().isOk()
+	        .expectBody().json(expectedReply);
+    }
+    
+	/**
+	 * Test to see if the order reference is returned correctly when an order is updated
+	 */
+    @Test
+	@Order(8)
+    public void testFulfuilOrderWithInvalidOrderReference() {
+
+        webTestClient.put()
+	    	.uri("/fufilOrder/300")
+	    	.exchange()
+	        .expectStatus().isBadRequest();
+    }
 	
 }
