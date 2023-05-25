@@ -142,5 +142,22 @@ class BrickControllerTest {
             .expectStatus().isOk()
             .expectBody().json(expectedReply);
     }
+    
+	/**
+	 * Test to see if the order reference is returned correctly when an order is updated
+	 */
+    @Test
+	@Order(6)
+    public void testUpdateOrder() {
+
+        String expectedReply = testFileReader.testDataFileAsString("reply4.json");
+        
+        // retrieve order reference 2
+        webTestClient.put()
+	    	.uri("/updateOrder/2/20")
+	    	.exchange()
+	        .expectStatus().isOk()
+	        .expectBody().json(expectedReply);
+    }
 	
 }
