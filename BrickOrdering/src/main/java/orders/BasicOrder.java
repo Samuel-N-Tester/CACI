@@ -1,6 +1,6 @@
 package orders;
 
-public class BasicOrder {
+public class BasicOrder implements Order {
 	
 	Long orderReference;
 	int numberOfBricks;

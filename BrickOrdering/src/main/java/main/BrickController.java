@@ -2,6 +2,7 @@ package main;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import orders.BasicOrderList;
-import orders.BasicOrder;
+import orders.AdvanceOrderList;
+import orders.AdvanceOrder;
 
 @SpringBootApplication
 @RestController
 public class BrickController {
 	
-	BasicOrderList basicOrderList = new BasicOrderList();
+	AdvanceOrderList advanceOrderList = new AdvanceOrderList();
 
 	public static void main(String[] args) {
 		SpringApplication.run(BrickController.class, args);
@@ -25,19 +26,25 @@ public class BrickController {
 	@RequestMapping(value = "/createOrder", method = RequestMethod.POST)
 	@ResponseBody
 	public Long createOrder(@RequestBody int numberOfBricks) {
-		return basicOrderList.createOrder(numberOfBricks);
+		return advanceOrderList.createOrder(numberOfBricks);
 	}
 	
 	@RequestMapping(value = "/getOrder", method = RequestMethod.GET)
 	@ResponseBody
-	public BasicOrder getOrder(@RequestParam(value="order", required=false, defaultValue="0")Long orderReference) {
-		return basicOrderList.getOrder(orderReference);
+	public AdvanceOrder getOrder(@RequestParam(value="order", required=false, defaultValue="0")Long orderReference) {
+		return advanceOrderList.getOrder(orderReference);
 	}
 	
 	@RequestMapping(value = "/getAllOrders", method = RequestMethod.GET)
 	@ResponseBody
-	public BasicOrder[] getAllOrders() {
-		return basicOrderList.getAllOrders();
+	public AdvanceOrder[] getAllOrders() {
+		return advanceOrderList.getAllOrders();
+	}
+	
+	@RequestMapping(value = "/updateOrder/{orderReference}/{numberOfBricks}", method = RequestMethod.PUT)
+	@ResponseBody
+	public Long updateOrder(@PathVariable Long orderReference, @PathVariable int numberOfBricks) {
+		return advanceOrderList.updateOrder(orderReference, numberOfBricks);
 	}
 
 }
