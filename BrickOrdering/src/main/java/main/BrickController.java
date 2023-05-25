@@ -45,8 +45,18 @@ public class BrickController {
 	
 	@RequestMapping(value = "/updateOrder/{orderReference}/{numberOfBricks}", method = RequestMethod.PUT)
 	@ResponseBody
-	public Long updateOrder(@PathVariable Long orderReference, @PathVariable int numberOfBricks) {
-		return advanceOrderList.updateOrder(orderReference, numberOfBricks);
+	public ResponseEntity<Object> updateOrder(@PathVariable Long orderReference, @PathVariable int numberOfBricks) {
+		
+		ResponseEntity<Object> responseEntity;	
+
+		try {
+			Long newOrderReference = advanceOrderList.updateOrder(orderReference, numberOfBricks);
+			responseEntity = ResponseEntity.ok(newOrderReference);
+		} catch (IllegalStateException e) {
+			responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		return responseEntity;
 	}
 	
 	@RequestMapping(value = "/fulfilOrder/{orderReference}", method = RequestMethod.PUT)

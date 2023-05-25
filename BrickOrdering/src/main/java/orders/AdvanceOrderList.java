@@ -48,6 +48,12 @@ public class AdvanceOrderList implements OrderList {
 	 * @return Long orderReference The reference of the new order
 	 */
 	public Long updateOrder(Long orderReference, int numberOfBricks) {
+
+		// Check to make sure the order has not been dispatched
+		if (orders.get(orderReference).getOrderStatus() == OrderStatus.DISPATCHED) {
+			throw new IllegalStateException();
+		}
+		
 		// Create a new order
 		Long updatedOrderReference = nextOrderReference.getAndIncrement();
 		AdvanceOrder advanceOrder = new AdvanceOrder(updatedOrderReference, numberOfBricks);
