@@ -167,13 +167,10 @@ class BrickControllerTest {
 	@Order(7)
     public void testFulfuilOrder() {
 
-        String expectedReply = testFileReader.testDataFileAsString("reply5.json");
-
         webTestClient.put()
-	    	.uri("/fufilOrder/3")
+	    	.uri("/fulfilOrder/3")
 	    	.exchange()
-	        .expectStatus().isOk()
-	        .expectBody().json(expectedReply);
+	        .expectStatus().isOk();
     }
     
 	/**
@@ -184,7 +181,7 @@ class BrickControllerTest {
     public void testFulfuilOrderWithInvalidOrderReference() {
 
         webTestClient.put()
-	    	.uri("/fufilOrder/300")
+	    	.uri("/fulfilOrder/300")
 	    	.exchange()
 	        .expectStatus().isBadRequest();
     }

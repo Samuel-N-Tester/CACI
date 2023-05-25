@@ -2,6 +2,8 @@ package main;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +47,22 @@ public class BrickController {
 	@ResponseBody
 	public Long updateOrder(@PathVariable Long orderReference, @PathVariable int numberOfBricks) {
 		return advanceOrderList.updateOrder(orderReference, numberOfBricks);
+	}
+	
+	@RequestMapping(value = "/fulfilOrder/{orderReference}", method = RequestMethod.PUT)
+	@ResponseBody
+	public ResponseEntity<Object> fulfilOrder(@PathVariable Long orderReference) {
+		
+		ResponseEntity<Object> responseEntity;	
+
+		try {
+			advanceOrderList.fulfilOrder(orderReference);
+			responseEntity = new ResponseEntity<>(HttpStatus.OK);
+		} catch (IllegalArgumentException e) {
+			responseEntity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+
+		return responseEntity;
 	}
 
 }
