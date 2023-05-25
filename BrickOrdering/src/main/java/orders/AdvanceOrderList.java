@@ -59,4 +59,14 @@ public class AdvanceOrderList implements OrderList {
 		return updatedOrderReference;
 	}
 
+	public void fulfilOrder(Long orderReference) {
+		if (!orders.containsKey(orderReference)) {
+			throw new IllegalArgumentException();
+		}
+		
+		orders.get(orderReference).setOrderStatus(OrderStatus.DISPATCHED);
+		
+		return;
+	}
+
 }
