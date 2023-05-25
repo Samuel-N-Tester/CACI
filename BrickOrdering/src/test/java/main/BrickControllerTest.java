@@ -185,5 +185,19 @@ class BrickControllerTest {
 	    	.exchange()
 	        .expectStatus().isBadRequest();
     }
+    
+	/**
+	 * Test to see if the order reference is returned correctly when an order is updated
+	 */
+    @Test
+	@Order(9)
+    public void testUpdateOrderThatIsDispatched() {
+        
+        // retrieve order reference 2
+        webTestClient.put()
+	    	.uri("/updateOrder/3/70")
+	    	.exchange()
+	        .expectStatus().isBadRequest();
+    }
 	
 }
